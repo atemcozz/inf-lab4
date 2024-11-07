@@ -5,8 +5,6 @@ IN_INDENT = ' ' * 2
 OUT_INDENT = ' ' * 2
 
 
-
-
 def indent_level(string, indent=IN_INDENT):
     res = 0
     indent_len = len(indent)
