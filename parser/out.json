@@ -1,4 +1,6 @@
 {
+  "str-bool": "yes",
+  "bool": true,
   "schedule": [
     {
       "day": "Вторник",

@@ -1,6 +1,4 @@
 from functools import lru_cache
-from os import pread
-from time import process_time
 from types import NoneType
 import re
 
@@ -129,6 +127,8 @@ def parse_string(string):
     res = string[:i]
     res = re.sub(r"\n\s+", "\n", res)
     if i < 0: return None
+    if res.startswith('"') and res.endswith('"'):
+        res = res[1:-1]
     return res.strip(), string[i:].strip()
 
 @lru_cache(None)
@@ -253,6 +253,7 @@ def obj_to_json(obj):
         return obj
     elif isinstance(obj, str):
         obj = obj.replace("\n", "\\n")
+        obj = obj.replace('"', '\\"')
         return f'"{obj}"'
 
 

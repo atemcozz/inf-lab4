@@ -16,25 +16,29 @@ start_time = time.perf_counter()
 for x in range(iterations):
     parsed = dumb_parser.yaml_to_json(content)
 end_time = time.perf_counter()
-print(f"Dumb parser: took {end_time - start_time}s")
+took = end_time - start_time
+print(f"Dumb parser: took {took}s ({iterations/(took):.2f} its/s)")
 
 # Lib parser
 start_time = time.perf_counter()
 for x in range(iterations):
     parsed = lib_parser.yaml_to_json(content)
 end_time = time.perf_counter()
-print(f"Lib parser: took {end_time - start_time}s")
+took = end_time - start_time
+print(f"Lib parser: took {took}s ({iterations/(took):.2f} its/s)")
 
 # Regex parser
 start_time = time.perf_counter()
 for x in range(iterations):
     parsed = regex_parser.yaml_to_json(content)
 end_time = time.perf_counter()
-print(f"Regex parser: took {end_time - start_time}s")
+took = end_time - start_time
+print(f"Regex parser: took {took}s ({iterations/(took):.2f} its/s)")
 
 # Formal grammar parser
 start_time = time.perf_counter()
 for x in range(iterations):
     parsed = fgrammar_parser.obj_to_json(fgrammar_parser.from_yaml(content))
 end_time = time.perf_counter()
-print(f"Formal grammar parser: took {end_time - start_time}s")
+took = end_time - start_time
+print(f"Formal grammar parser: took {took}s ({iterations/(took):.2f} its/s)")
