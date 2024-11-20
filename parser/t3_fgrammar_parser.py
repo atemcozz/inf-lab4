@@ -1,6 +1,8 @@
 from functools import lru_cache
+from os import pread
+from time import process_time
 from types import NoneType
-
+import re
 
 def __is_float(x):
     try:
@@ -96,16 +98,38 @@ def parse_boolean(string):
 
 @lru_cache(None)
 def parse_string(string):
-    newline_ind = string.find('\n')
-    if newline_ind != -1:
-        res = string[:newline_ind].strip()
-    else:
-        res = string.strip()
-    if len(res) == 0 or res.endswith(":") or ": " in res:
-        return None
-    remain = string[newline_ind + 1:] if newline_ind != -1 else ''
-    return res.strip(), remain.strip()
-
+    # newline_ind = string.find('\n')
+    # if newline_ind != -1:
+    #     res = string[:newline_ind].strip()
+    # else:
+    #     res = string.strip()
+    # if len(res) == 0 or res.endswith(":") or ": " in res:
+    #     return None
+    # remain = string[newline_ind + 1:] if newline_ind != -1 else ''
+    # return res.strip(), remain.strip()
+    string = string.strip()
+    i = 0
+    boundary_found = False
+    cur_newlines = 0
+    while 0 <= i < len(string):
+        if string[i] == '\n':
+            cur_newlines += 1
+        if string[i:i+2] == ": " or string[i:i+2] == ":\n":
+            if cur_newlines == 0:
+                return None
+            while string[i] != '\n':
+                i -= 1
+                if i <= 0:
+                    i = -1
+                    break
+            boundary_found = True
+        if boundary_found:
+            break
+        i += 1
+    res = string[:i]
+    res = re.sub(r"\n\s+", "\n", res)
+    if i < 0: return None
+    return res.strip(), string[i:].strip()
 
 @lru_cache(None)
 def parse_key_value(string):
@@ -227,7 +251,8 @@ def obj_to_json(obj):
         return str(obj).lower()
     elif isinstance(obj, int) or isinstance(obj, float):
         return obj
-    else:
+    elif isinstance(obj, str):
+        obj = obj.replace("\n", "\\n")
         return f'"{obj}"'
 
 
