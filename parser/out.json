@@ -7,8 +7,30 @@
   "negative_floating_point": -0.001,
   "exponential_number": 12300.0,
   "negative_exponential": -0.0025,
-  "boolean_true": "[true, yes, on, TRUE, YES, ON, True, Yes, On, y, Y]",
-  "boolean_false": "[false, no, off, FALSE, NO, OFF, False, No, Off, n, N]",
+  "boolean_true": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "boolean_false": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
   "null_value": null,
   "array_of_primitives": "- 1\n- \"two\"\n- false\n- null\n- 3.14",
   "array_of_objects": [

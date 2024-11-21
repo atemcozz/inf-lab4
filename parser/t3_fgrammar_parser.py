@@ -117,6 +117,8 @@ def parse_string(string):
     # remain = string[newline_ind + 1:] if newline_ind != -1 else ''
     # return res.strip(), remain.strip()
     string = string.lstrip()
+    if string.startswith("["):
+        return parse_json_array(string)
     if string.startswith('"') or string.startswith("'"):
         return parse_quoted_string(string)
     i = 0
@@ -184,6 +186,23 @@ def parse_object(string):
 
     return parse_objects_row(string[:boundary_pos])[0], string[boundary_pos:]
 
+@lru_cache(None)
+def parse_json_array(string):
+    string = string.lstrip()
+    array = []
+    if string[0] != "[":
+        return None
+    i = 1
+    j = 1
+    while string[i] != "]":
+        if string[i] == ",":
+            value = parse_value(string[j:i])
+            if value:
+                array.append(parse_value(string[j:i])[0])
+            else: array.append(None)
+            j = i + 1
+        i += 1
+    return array, string[i+1:]
 
 @lru_cache(None)
 def parse_array(string):
