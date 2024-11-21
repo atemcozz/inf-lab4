@@ -120,6 +120,9 @@ def parse_string(string):
     # remain = string[newline_ind + 1:] if newline_ind != -1 else ''
     # return res.strip(), remain.strip()
     string = string.lstrip()
+    if string.startswith("-"):
+        return None
+        return parse_json_array(string)
     if string.startswith("["):
         return parse_json_array(string)
     if string.startswith('"') or string.startswith("'"):
@@ -205,6 +208,7 @@ def parse_json_array(string):
             else: array.append(None)
             j = i + 1
         i += 1
+    array.append(parse_value(string[j:i])[0])
     return array, string[i+1:]
 
 @lru_cache(None)
@@ -297,7 +301,7 @@ def obj_to_json(obj):
 if __name__ == "__main__":
     file_in = open("../resources/schedule_complex.yml", "r", encoding="UTF-8")
     file_in2 = open("../resources/etalon.yaml", "r", encoding="UTF-8")
-    file_out2 = open("out.json", "w", encoding="UTF-8")
+    file_out2 = open("out_etalon.json", "w", encoding="UTF-8")
     file_out = open("out_schedule.json", "w", encoding="UTF-8")
     content = file_in.read()
     content2 = file_in2.read()

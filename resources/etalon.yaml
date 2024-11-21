@@ -27,21 +27,21 @@ array_of_objects:
     details:
       description: "This is the second object"
       active: false
-#nested_object:
-#  level1:
-#    level2:
-#      level3:
-#        level4: "deeply nested value"
-#mixed_array:
-#  - "string"
-#  - 123
-#  - true
-#  - null
-#  - nested_key: "nested_value"
-#  -
-#    - 1
-#    - 2
-#    - 3
+nested_object:
+  level1:
+    level2:
+      level3:
+        level4: "deeply nested value"
+mixed_array:
+  - "string"
+  - 123
+  - true
+  - null
+  - nested_key: "nested_value"
+  -
+    - 1
+    - 2
+    - 3
 special_characters:
   quote: "\""
   backslash: "\\"

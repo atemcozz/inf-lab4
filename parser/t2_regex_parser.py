@@ -31,7 +31,7 @@ def yaml_to_json(string):
 
 if __name__ == "__main__":
     file_in = open("../resources/schedule.yml", "r", encoding="UTF-8")
-    file_out = open("out.json", "w", encoding="UTF-8")
+    file_out = open("out_schedule.json", "w", encoding="UTF-8")
 
     content = file_in.read()
 
