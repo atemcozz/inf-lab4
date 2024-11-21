@@ -2,7 +2,7 @@ schedule:
   day: Пятница
   pairs:
     pair-1:
-      name: Математический анализ
+      name: Математический";" анализ
       type: lecture
       teacher: Попов Игорь Юрьевич
       time-begin: 10:00
