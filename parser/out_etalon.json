@@ -75,7 +75,12 @@
     null,
     {
       "nested_key": "nested_value"
-    }
+    },
+    [
+      1,
+      2,
+      3
+    ]
   ],
   "special_characters": {
     "quote": "\"",

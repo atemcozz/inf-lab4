@@ -33,6 +33,7 @@ def parse_key(string):
 
 @lru_cache(None)
 def parse_number(string):
+    string = string.lstrip()
     newline_ind = string.find('\n')
     if newline_ind != -1:
         res = string[:newline_ind].strip()
@@ -213,7 +214,7 @@ def parse_json_array(string):
 
 @lru_cache(None)
 def parse_array(string):
-    print([string])
+
     array = []
     if string[0] != '\n':
         return None
@@ -230,11 +231,12 @@ def parse_array(string):
     begin_ptr = i
     # Collecting characters until there is another
     # array element with the same indent or boundary position
+
     while i <= boundary_pos:
-        if string[i:i + inds_count + 3] == '\n' + ' ' * inds_count + "- " or i == boundary_pos:
-            parsed = string[begin_ptr:i].strip()
+        if string[i:i + inds_count + 2] == '\n' + ' ' * inds_count + "-" or i == boundary_pos:
+            parsed = string[begin_ptr:i]
             array.append(parse_value(parsed)[0])
-            begin_ptr = i + inds_count + 3
+            begin_ptr = i + inds_count + 2
         i += 1
     return array, string[boundary_pos:]
 
@@ -256,6 +258,7 @@ def parse_objects_row(string):
 
 @lru_cache(None)
 def parse_value(string):
+
     chain = [parse_null, parse_boolean, parse_number, parse_string, parse_array, parse_object, parse_objects_row]
     res = None
     # Iterating string through subparsers until some part of it is parsed
