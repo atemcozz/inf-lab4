@@ -5,8 +5,8 @@
   "negative_integer": -7,
   "floating_point_number": 3.14159,
   "negative_floating_point": -0.001,
-  "exponential_number": 12300.0,
-  "negative_exponential": -0.0025,
+  "exponential_number": 1.23e4,
+  "negative_exponential": -2.5e-3,
   "boolean_true": [
     true,
     true,

@@ -2,6 +2,12 @@ from functools import lru_cache
 from types import NoneType
 import re
 
+class NumberWrapper:
+    def __init__(self,  value, form):
+        self.value = value
+        self.form = form
+
+
 def __is_float(x):
     try:
         _ = float(x)
@@ -43,9 +49,12 @@ def parse_number(string):
         return None
 
     if __is_int(res):
-        res = int(res)
+        res = NumberWrapper(int(res), "normal")
     elif __is_float(res):
-        res = float(res)
+        if "e" in res:
+            res = NumberWrapper(res, "exp")
+        else:
+            res = NumberWrapper(float(res), "normal")
     else:
         return None
     remain = string[newline_ind + 1:] if newline_ind != -1 else ''
@@ -295,8 +304,8 @@ def obj_to_json(obj):
         return "null"
     elif isinstance(obj, bool):
         return str(obj).lower()
-    elif isinstance(obj, int) or isinstance(obj, float):
-        return obj
+    elif isinstance(obj, NumberWrapper):
+        return str(obj.value)
     elif isinstance(obj, str):
         obj = obj.replace("\n", "\\n")
         return f'"{obj}"'
