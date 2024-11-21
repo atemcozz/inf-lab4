@@ -32,7 +32,9 @@
     false
   ],
   "null_value": null,
-  "array_of_primitives": "- 1\n- \"two\"\n- false\n- null\n- 3.14",
+  "array_of_primitives": "- 1\n- "
+  two
+  "\n- false\n- null\n- 3.14",
   "array_of_objects": [
     {
       "id": 1,
@@ -51,15 +53,15 @@
       }
     }
   ],
-  "nested_object": {
-    "level1": {
-      "level2": {
-        "level3": {
-          "level4": "deeply nested value"
-        }
-      }
-    }
-  },
-  "mixed_array": "- \"string\"\n- 123\n- true\n- null",
-  "- nested_key": "nested_value"
+  "special_characters": {
+    "quote": "\"",
+    "backslash": "\\",
+    "slash": "/",
+    "backspace": "\b",
+    "form_feed": "\f",
+    "newline": "\n",
+    "carriage_return": "\r",
+    "tab": "\t",
+    "unicode_example": "❤"
+  }
 }

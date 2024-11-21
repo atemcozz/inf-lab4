@@ -100,7 +100,10 @@ def parse_quoted_string(string):
     q_sym = string[0]
     i = 1
     while i < len(string):
-        if string[i] == q_sym and string[i-1] != "\\":
+        if string[i] == '\\':
+            i += 2
+            continue
+        if string[i] == q_sym:
             break
         i += 1
     return string[1:i], string[i+1:]
@@ -288,19 +291,20 @@ def obj_to_json(obj):
         return obj
     elif isinstance(obj, str):
         obj = obj.replace("\n", "\\n")
-        obj = obj.replace('"', '\\"')
         return f'"{obj}"'
 
 
 if __name__ == "__main__":
     file_in = open("../resources/schedule_complex.yml", "r", encoding="UTF-8")
     file_in2 = open("../resources/etalon.yaml", "r", encoding="UTF-8")
-    file_out = open("out.json", "w", encoding="UTF-8")
-
+    file_out2 = open("out.json", "w", encoding="UTF-8")
+    file_out = open("out_schedule.json", "w", encoding="UTF-8")
     content = file_in.read()
     content2 = file_in2.read()
+    print(from_yaml(content2))
     result = obj_to_json(from_yaml(content))
     result2 = obj_to_json(from_yaml(content2))
     print(result)
     print(result2)
-    file_out.write(result2)
+    file_out.write(result)
+    file_out2.write(result2)
