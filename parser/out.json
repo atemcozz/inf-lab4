@@ -1,104 +1,43 @@
 {
-  "str-bool": "yes",
-  "bool": true,
-  "schedule": [
+  "string_example": "Hello, World!",
+  "string_with_escape_chars": "This is a string with newline\n and tab\t characters, and a unicode heart: ❤",
+  "integer_number": 42,
+  "negative_integer": -7,
+  "floating_point_number": 3.14159,
+  "negative_floating_point": -0.001,
+  "exponential_number": 12300.0,
+  "negative_exponential": -0.0025,
+  "boolean_true": "[true, yes, on, TRUE, YES, ON, True, Yes, On, y, Y]",
+  "boolean_false": "[false, no, off, FALSE, NO, OFF, False, No, Off, n, N]",
+  "null_value": null,
+  "array_of_primitives": "- 1\n- \"two\"\n- false\n- null\n- 3.14",
+  "array_of_objects": [
     {
-      "day": "Вторник",
-      "pairs": {
-        "pair-1": {
-          "name": "Английский язык C1",
-          "type": "practice",
-          "teacher": "Вуд Джек",
-          "time-begin": "08:20",
-          "time-end": "09:50",
-          "room": "3401a",
-          "location": "ул.Ломоносова, д.9, лит. Б",
-          "format": "Очно-дистанционный",
-          "weeks": "2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17"
-        },
-        "pair-2": {
-          "name": "Английский язык C2",
-          "type": "practice",
-          "teacher": "Вуд Джек",
-          "time-begin": "10:00",
-          "time-end": "11:30",
-          "room": "3401a",
-          "location": "ул.Ломоносова, д.9, лит. Б",
-          "format": "Очно-дистанционный",
-          "weeks": "2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17"
-        },
-        "pair-3": {
-          "name": "Линейная алгебра",
-          "type": "lecture",
-          "teacher": "Тушавин Глеб Владимирович",
-          "time-begin": "11:40",
-          "time-end": "13:10",
-          "room": 2202,
-          "location": "ул.Ломоносова, д.9, лит. А",
-          "format": "Очно-дистанционный",
-          "weeks": "8, 9, 10, 11, 12, 13, 14, 15, 16, 17"
-        },
-        "pair-4": {
-          "name": "Линейная алгебра",
-          "type": "practice",
-          "teacher": "Шиманская Галина Станиславовна",
-          "time-begin": "13:30",
-          "time-end": "15:00",
-          "room": 4306,
-          "location": "ул.Ломоносова, д.9, лит. Б",
-          "format": "Очно-дистанционный",
-          "weeks": "8, 9, 10, 11, 12, 13, 14, 15, 16, 17"
-        }
+      "id": 1,
+      "name": "Object 1",
+      "details": {
+        "description": "This is the first object",
+        "active": true
       }
     },
     {
-      "day": "Пятница",
-      "pairs": {
-        "pair-1": {
-          "name": "Математический анализ",
-          "type": "lecture",
-          "teacher": "Попов Игорь Юрьевич",
-          "time-begin": "10:00",
-          "time-end": "11:30",
-          "room": 4306,
-          "location": "ул.Ломоносова, д.9, лит. Б",
-          "format": "Очно-дистанционный",
-          "weeks": "2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16"
-        },
-        "pair-2": {
-          "name": "Математический анализ",
-          "type": "practice",
-          "teacher": "Попов Игорь Юрьевич",
-          "time-begin": "11:40",
-          "time-end": "13:10",
-          "room": 2202,
-          "location": "ул.Ломоносова, д.9, лит. Б",
-          "format": "Очно-дистанционный",
-          "weeks": "2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16"
-        },
-        "pair-3": {
-          "name": "Основы дискретной математики (базовый уровень)",
-          "type": "lecture",
-          "teacher": "Поляков Владимир Иванович",
-          "time-begin": "17:00",
-          "time-end": "18:30",
-          "room": 1428,
-          "location": "Кронверкский пр., д.49, лит.А",
-          "format": "Очно-дистанционный",
-          "weeks": "8, 9, 10, 11, 12,\n13, 14, 15, 16"
-        },
-        "pair-4": {
-          "name": "Основы дискретной математики (базовый уровень)",
-          "type": "practice",
-          "teacher": "Поляков\nВладимир Иванович",
-          "time-begin": "18:40",
-          "time-end": "20:10",
-          "room": 1428,
-          "location": "Кронверкский пр., д.49, лит.А",
-          "format": "Очно-дистанционный",
-          "weeks": "8, 9, 10, 11, 12, 13, 14, 15, 16"
+      "id": 2,
+      "name": "Object 2",
+      "details": {
+        "description": "This is the second object",
+        "active": false
+      }
+    }
+  ],
+  "nested_object": {
+    "level1": {
+      "level2": {
+        "level3": {
+          "level4": "deeply nested value"
         }
       }
     }
-  ]
+  },
+  "mixed_array": "- \"string\"\n- 123\n- true\n- null",
+  "- nested_key": "nested_value"
 }
