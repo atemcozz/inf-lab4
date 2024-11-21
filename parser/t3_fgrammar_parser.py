@@ -213,6 +213,7 @@ def parse_json_array(string):
 
 @lru_cache(None)
 def parse_array(string):
+    print([string])
     array = []
     if string[0] != '\n':
         return None
@@ -305,7 +306,7 @@ if __name__ == "__main__":
     file_out = open("out_schedule.json", "w", encoding="UTF-8")
     content = file_in.read()
     content2 = file_in2.read()
-    print(from_yaml(content2))
+
     result = obj_to_json(from_yaml(content))
     result2 = obj_to_json(from_yaml(content2))
     print(result)
