@@ -93,16 +93,6 @@ def parse_boolean(string):
 
     return res, remain.strip()
 
-@lru_cache(None)
-def parse_quoted_string(string):
-    string = string.lstrip()
-    q_sym = string[0]
-    i = 1
-    while i < len(string):
-        if string[i] == q_sym and string[i-1] != "\\":
-            break
-        i += 1
-    return string[1:i], string[i+1:]
 
 @lru_cache(None)
 def parse_string(string):
@@ -115,9 +105,7 @@ def parse_string(string):
     #     return None
     # remain = string[newline_ind + 1:] if newline_ind != -1 else ''
     # return res.strip(), remain.strip()
-    string = string.lstrip()
-    if string.startswith('"') or string.startswith("'"):
-        return parse_quoted_string(string)
+    string = string.strip()
     i = 0
     boundary_found = False
     cur_newlines = 0
@@ -132,7 +120,6 @@ def parse_string(string):
                 if i <= 0:
                     i = -1
                     break
-
             boundary_found = True
         if boundary_found:
             break
@@ -227,12 +214,8 @@ def parse_objects_row(string):
     return res, string.strip()
 
 
-def rem_comments(string):
-    return re.sub(r"\s#.*", "", string)
-
 @lru_cache(None)
 def parse_value(string):
-
     chain = [parse_null, parse_boolean, parse_number, parse_string, parse_array, parse_object, parse_objects_row]
     res = None
     # Iterating string through subparsers until some part of it is parsed
@@ -245,9 +228,7 @@ def parse_value(string):
 
 @lru_cache(None)
 def from_yaml(string):
-    string = string.strip()
-    string = rem_comments(string)
-    parsed = parse_value(string)
+    parsed = parse_value(string.strip())
 
     if parsed is None or parsed[1].strip():
         raise ValueError("Bad string")
@@ -277,7 +258,7 @@ def obj_to_json(obj):
 
 
 if __name__ == "__main__":
-    file_in = open("etalon.yaml", "r", encoding="UTF-8")
+    file_in = open("../resources/schedule_complex.yml", "r", encoding="UTF-8")
     file_out = open("out.json", "w", encoding="UTF-8")
 
     content = file_in.read()

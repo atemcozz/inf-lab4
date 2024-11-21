@@ -14,9 +14,9 @@ def obj_to_csv(obj):
 
 
 if __name__ == "__main__":
-    file_in = open("../resources/schedule.yml", "r", encoding="utf-8")
-    file_out = open("out.csv", "w", encoding="cp1251")
+    file_in = open("../resources/schedule.yml", "r", encoding="UTF-8")
+    file_out = open("out.csv", "w", encoding="UTF-8")
     content = file_in.read()
     result = obj_to_csv(from_yaml(content))
     print(result)
-    file_out.write(result)
+    file_out.write(result, )
