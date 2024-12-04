@@ -1,3 +1,4 @@
+
 from t3_fgrammar_parser import from_yaml
 
 
@@ -8,7 +9,20 @@ def obj_to_csv(obj):
     rows.append(['pair'] + list(header))
     for key, value in pairs.items():
         rows.append([key] + list(value.values()))
-    result = '\n'.join(';'.join(f'"{str(item)}"' for item in row) for row in rows)
+    entries = []
+    for i in range(len(rows)):
+        entries.append([])
+        for item in rows[i]:
+            if "NumberWrapper" in str(type(item)):
+                _str = str(item.value)
+            else:
+                _str = str(item)
+            if ';' in _str:
+                _str = _str.replace('"', '""')
+                _str = f'"{_str}"'
+
+            entries[i].append(_str)
+    result = '\n'.join([';'.join(row) for row in entries])
 
     return result
 
