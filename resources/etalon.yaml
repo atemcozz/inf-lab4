@@ -2,10 +2,11 @@ string_example: "Hello, World!"
 string_with_escape_chars: "This is a string with newline\n and tab\t characters, and a unicode heart: ❤"
 #this is simple comment
 integer_number: 42
-negative_integer: -7
+negative_integer: -7 #custom comment
 floating_point_number: 3.14159
 negative_floating_point: -0.001
 exponential_number: 1.23e4
+         #dfgkgfgkflf
 negative_exponential: -2.5e-3
 boolean_true: [true, yes, on, TRUE, YES, ON, True, Yes, On, y, Y]
 boolean_false: [false, no, off, FALSE, NO, OFF, False, No, Off, n, N]

@@ -1,6 +1,12 @@
+import json
 from functools import lru_cache
+from pprint import pprint
+from sys import flags
 from types import NoneType
 import re
+
+from unicodedata import numeric
+
 
 class NumberWrapper:
     def __init__(self,  value, form):
@@ -277,17 +283,36 @@ def parse_value(string):
             break
     return (res[0], res[1].strip()) if res else None
 
-def rem_comments(string):
-    return re.sub(r"\s#.*", "", string)
+
+def manage_comments(string):
+    ctx = []
+    lines = string.split('\n')
+    print(lines)
+    for i in range(len(lines)):
+        if re.match(r"(^.*\s*#.*$)|(.*\s+#.*$)", lines[i], flags=re.MULTILINE):
+            comment = re.findall(r"#(.*)", lines[i])[0]
+
+            prev_line = lines[i - 1] if i > 0 else ""
+            next_line = lines[i + 1] if i < len(lines) - 1 else ""
+
+            res = {
+                "comment": comment,
+                "line": i,
+                "context": '\n'.join([prev_line, lines[i], next_line]),
+            }
+            ctx.append(res)
+    return (re.sub(r"(^.*\s*#.*$)|(\s+#.*$)", "", string, flags=re.MULTILINE), ctx)
+
+
 @lru_cache(None)
 def from_yaml(string):
     string = string.strip()
-    string = rem_comments(string)
+    string, comments_ctx = manage_comments(string)
     parsed = parse_value(string.strip())
 
     if parsed is None or parsed[1].strip():
         raise ValueError("Bad string")
-    return parsed[0]
+    return parsed[0], comments_ctx
 
 
 def obj_to_json(obj):
@@ -306,6 +331,8 @@ def obj_to_json(obj):
         return str(obj).lower()
     elif isinstance(obj, NumberWrapper):
         return str(obj.value)
+    elif isinstance(obj, int) or isinstance(obj, float):
+        return str(obj)
     elif isinstance(obj, str):
         res = obj[0]
         i = 1
@@ -321,16 +348,13 @@ def obj_to_json(obj):
 
 
 if __name__ == "__main__":
-    file_in = open("../resources/schedule_complex.yml", "r", encoding="UTF-8")
     file_in2 = open("../resources/etalon.yaml", "r", encoding="UTF-8")
     file_out2 = open("out_etalon.json", "w", encoding="UTF-8")
-    file_out = open("out_schedule.json", "w", encoding="UTF-8")
-    content = file_in.read()
+    comments_out = open("comments.json", "w", encoding="UTF-8")
     content2 = file_in2.read()
-
-    result = obj_to_json(from_yaml(content))
-    result2 = obj_to_json(from_yaml(content2))
-    print(result)
+    parsed_obj, comments = from_yaml(content2)
+    result2 = obj_to_json(parsed_obj)
     print(result2)
-    file_out.write(result)
+    print(comments)
     file_out2.write(result2)
+    comments_out.write(obj_to_json(comments))

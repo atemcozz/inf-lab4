@@ -1,0 +1,17 @@
+[
+  {
+    "comment": "this is simple comment",
+    "line": 2,
+    "context": "string_with_escape_chars: \"This is a string with newline\n and tab\t characters, and a unicode heart: ❤\"\n#this is simple comment\ninteger_number: 42"
+  },
+  {
+    "comment": "custom comment",
+    "line": 4,
+    "context": "integer_number: 42\nnegative_integer: -7 #custom comment\nfloating_point_number: 3.14159"
+  },
+  {
+    "comment": "dfgkgfgkflf",
+    "line": 8,
+    "context": "exponential_number: 1.23e4\n         #dfgkgfgkflf\nnegative_exponential: -2.5e-3"
+  }
+]
