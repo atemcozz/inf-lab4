@@ -307,8 +307,17 @@ def obj_to_json(obj):
     elif isinstance(obj, NumberWrapper):
         return str(obj.value)
     elif isinstance(obj, str):
-        obj = obj.replace("\n", "\\n")
-        return f'"{obj}"'
+        res = obj[0]
+        i = 1
+        while i < len(obj):
+            if obj[i] == '"' and obj[i-1] != '\\':
+                res += '\\"'
+                i += 1
+                continue
+            res += obj[i]
+            i += 1
+        res = res.replace("\n", "\\n")
+        return f'"{res}"'
 
 
 if __name__ == "__main__":
